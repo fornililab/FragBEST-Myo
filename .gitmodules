@@ -1,0 +1,6 @@
+[submodule "utils/thirdparty/masif"]
+	path = utils/thirdparty/masif
+	url = https://github.com/yuyuan871111/masif.git
+[submodule "utils/thirdparty/FragBEST_pymol_plugin"]
+	path = utils/thirdparty/FragBEST_pymol_plugin
+	url = https://github.com/fornililab/FragBEST_pymol_plugin
