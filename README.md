@@ -58,32 +58,32 @@ pixi run jupyter notebook
 
 Use `ctrl-c` to stop your jupyter notebook.
 
-See more details about third-party softwares and alternative way to activate the environment in [Get started](./docs/source/getstarted.rst). 
+See more details about third-party softwares and alternative way to activate the environment in [Get started](https://fragbest-myo.readthedocs.io/en/latest/getstarted.html). 
 
 ## User Guide & Documentation
-The [User Guide](./tutorial/) includes three tutorials to help you learn how to use FragBEST-Myo effectively:   
+The [User Guide](https://fragbest-myo.readthedocs.io/en/latest/) includes three tutorials to help you learn how to use FragBEST-Myo effectively:   
 
 1. **Get started with FragBEST-Myo: Basics of TrajectoryHandler (Analyze a Frame in a Holo Trajectory)**  
    This tutorial is intended for users who want to learn how to manage molecular dynamics (MD) trajectories using `TrajectoryHandler` and understand the necessary files to prepare before running predictions.  
    - We demonstrate how to use `TrajectoryHandler` to analyze a frame in a holo trajectory (cardiac myosin with omecamtiv mecarbil) using the FragBEST-Myo pretrained model.  
-   - [Tutorial Link](./tutorial/01_trajectory_handler.ipynb)  
+   - [Tutorial Link](https://fragbest-myo.readthedocs.io/en/latest/notebooks/01_trajectory_handler.html)  
 
 2. **Analyze PDBs from RCSB**  
    This tutorial is designed for users who want to compare and rank static structures from RCSB (or a protein ensemble consisting of multiple PDBs) to select the most suitable protein conformation for drug design.  
    - We demonstrate how to analyze PDBs from RCSB using `TrajectoryHandler`, `HoloDescriptor`, and `HoloDescriptorAnalyser`.  
-   - [Tutorial Link](./tutorial/02_analyze_PDB_from_RCSB.ipynb)  
+   - [Tutorial Link](https://fragbest-myo.readthedocs.io/en/latest/notebooks/02_analyze_PDB_from_RCSB.html)  
 
 3. **Detect Holo-like Conformations from an Apo Trajectory**  
    This tutorial is designed for users who want to identify the holo-like protein conformations from an apo trajectory for drug design.  
    - We demonstrate how to analyze an apo trajectory using `TrajectoryHandler` and leverage parallel processors with `TrajHandlerPreprocess` and `TrajHandlerPrediction` to speed up the analysis.  
-   - [Tutorial Link](./tutorial/03_holo_like_form_detect.ipynb)  
+   - [Tutorial Link](https://fragbest-myo.readthedocs.io/en/latest/notebooks/03_holo_like_form_detect.html)  
 
-We also provide a [Q&A documentation](./docs/source/qa.rst) to address and answer some common questions you might have. Feel free to refer to it for additional guidance or troubleshooting!
+We also provide a [Q&A documentation](https://fragbest-myo.readthedocs.io/en/latest/qa.html) to address and answer some common questions you might have. Feel free to refer to it for additional guidance or troubleshooting!
 
-Also, see the [Documentation](./docs/source/index.rst) for the argument and source code for document. 
+Also, see the [Documentation](https://fragbest-myo.readthedocs.io/en/latest/index.html) for the argument and source code for document. 
 
 ## Development documentation
-See [Development](./docs/source/development.rst).
+See [Development](https://fragbest-myo.readthedocs.io/en/latest/development.html).
 
 
 ## Citation
@@ -92,6 +92,6 @@ If you publish results produced with FragBEST-Myo or develop methods based on Fr
 [TBU] bioRxiv 2026
 
 ## License
-Copyright (C) 2026 Yu-Yuan Yang, Richard W. Pickersgill and Arianna Fornili
+Copyright (C) 2024-2026 Yu-Yuan Yang, Richard W. Pickersgill and Arianna Fornili
 
 FragBEST-Myo is licensed under GPL-3.0.

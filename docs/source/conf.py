@@ -9,7 +9,8 @@ from pathlib import Path
 
 # -- Path setup --------------------------------------------------------------
 # Add the project directory to the system path
-sys.path.insert(0, str(Path("../..", "utils").resolve()))
+# We need to add the parent directory of 'utils', not 'utils' itself
+sys.path.insert(0, str(Path("../..").resolve()))
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information

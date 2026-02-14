@@ -40,13 +40,13 @@ Please check more details about the third-party dependencies used in this projec
 
    The installation code will automatically download `msms`_ (check with 
    `the author <https://ccsb.scripps.edu/msms/license/>`_ if you are a commercial user) 
-   and `APBS`_ from the source links, install the `adapted masif`_, `reduce`_ and 
+   and `APBS`_ from the source links, install the `adapted masif`_, and 
    `FragBEST_pymol_plugin` (adapted from `MaSIF`_) from `Github repo` (as a submodule), 
    use our `adapted DeepDrug3D <https://github.com/fornililab/FragBEST-Myo/tree/main/utils/thirdparty/deepdrug3d>`_ 
    and `adapted 3D U-Net pytorch implementation <https://github.com/fornililab/FragBEST-Myo/tree/main/utils/thirdparty/unet3d_model>`_ 
    (located in ``./utils/thirdparty``). Since `PyMesh`_ is officially unsupported for python 3.10, we installed 
    `PyMesh`_ by a pre-built wheel `here <https://github.com/fornililab/FragBEST-Myo/tree/main/utils/thirdparty/pymesh/pymesh2-0.3-cp310-cp310-linux_x86_64.whl>`_ 
-   from our `adapted PyMesh repo <https://github.com/yuyuan871111/PyMesh>`_.
+   from our `adapted PyMesh repo <https://github.com/yuyuan871111/PyMesh>`_. `reduce`_ will be installed by `pixi`_ from `bioconda` channel.
 
 
 .. code-block:: bash

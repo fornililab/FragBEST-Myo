@@ -1,4 +1,4 @@
-# Advanced usage for FragBEST-myo
+# Advanced usage for FragBEST-Myo
 
 ## Trajectory Handler
 
