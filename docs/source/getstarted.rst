@@ -85,7 +85,7 @@ subfolder to activate the virtual environment:
 .. code-block:: bash
 
    # Activate the virtual environment (pixi)
-   pixi run shell
+   pixi shell
    # in the virtual environment, it looks like:
    # (FragBEST-Myo) username@servername:~/path/to/FragBEST-Myo$
 
