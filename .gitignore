@@ -230,7 +230,7 @@ utils/tests/test_data/.PPS_OMB_MD1_aligned_test.xtc_offsets.npz
 archive
 
 # model ckpt
-utils/ppseg/myo/Kfold2_best_model_168_miou=0.7525.pt
+utils/ppseg/myo/*.pt
 
 # pixi environments
 .pixi/*
