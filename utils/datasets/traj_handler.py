@@ -23,6 +23,202 @@ from .feature_handler import generate_masif_features
 _TYPES = Literal["complex", "protein", "ligand"]
 
 
+def check_standard_names(u: mda.Universe):
+    """Check the resnames and atom names for the topology.
+
+    Arguments:
+        u: The input MDAnalysis Universe.
+    Returns:
+        None
+    """
+    standard_resnames = {
+        "ALA",
+        "GLY",
+        "SER",
+        "THR",
+        "LEU",
+        "ILE",
+        "VAL",
+        "ASN",
+        "GLN",
+        "ARG",
+        "HIS",
+        "TRP",
+        "PHE",
+        "TYR",
+        "GLU",
+        "ASP",
+        "LYS",
+        "PRO",
+        "CYS",
+        "MET",
+    }
+    top_res = set(u.select_atoms("protein").residues.resnames)
+    unique_atomnames = set(u.select_atoms("protein").atoms.names)
+    assert top_res.issubset(standard_resnames), (
+        f"Unexpected residues found: {top_res - standard_resnames}.\n"
+        "Try to use convert_to_standard_names:\n"
+        "    from utils.datasets.traj_handler import convert_to_standard_names"
+        "    convert_to_standard_names(PDB_path)\n"
+        "Then, you can use the converted PDB file as the topology for your trajectory."
+    )
+
+    assert not any(name.startswith(("1", "2", "3")) for name in unique_atomnames), (
+        "Unexpected atom names found (starting with 1, 2, or 3)"
+        f"{[name for name in unique_atomnames if name.startswith(('1', '2', '3'))]}.\n"
+        "Try to use convert_to_standard_names:\n"
+        "    from utils.datasets.traj_handler import convert_to_standard_names\n"
+        "    convert_to_standard_names(PDB_path)\n"
+        "Then, you can use the converted PDB file as the topology for your trajectory."
+    )
+
+
+def convert_to_standard_names(PDB_path: str | Path):
+    """Convert the resnames and atom names in the PDB file to standard ones.
+
+    Arguments:
+        PDB_path: The path to the input PDB file.
+    Returns:
+        None. The converted PDB file will be saved to the same directory with the
+        suffix "_converted.pdb".
+    """
+    u = mda.Universe(PDB_path)
+    original_resnames = set(u.residues.resnames)
+    original_atomnames = set(u.atoms.names)
+
+    # Define a mapping from non-standard to standard residue names
+    resname_mapping = {
+        # alanine
+        "ALAD": "ALA",
+        "DALA": "ALA",
+        "NALA": "ALA",
+        "CALA": "ALA",
+        # arginine
+        "ARGN": "ARG",
+        "NARG": "ARG",
+        "CARG": "ARG",
+        # asparagine
+        "NASN": "ASN",
+        "CASN": "ASN",
+        "CASF": "ASN",
+        "ASF": "ASN",
+        "ASN1": "ASN",
+        # aspartic acid
+        "ASH": "ASP",
+        "ASPH": "ASP",
+        "ASPP": "ASP",
+        "NASP": "ASP",
+        "CASP": "ASP",
+        # cysteine
+        "CYS1": "CYS",
+        "CYS2": "CYS",
+        "CYSH": "CYS",
+        "CYM": "CYS",
+        "CYN": "CYS",
+        "CYX": "CYS",
+        "NCYS": "CYS",
+        "CCYS": "CYS",
+        "NCYX": "CYS",
+        "CCYX": "CYS",
+        # gluatmic acid
+        "GLUH": "GLU",
+        "GLUP": "GLU",
+        "GLH": "GLU",
+        "NGLU": "GLU",
+        "CGLU": "GLU",
+        # glutamine
+        "NGLN": "GLN",
+        "CGLN": "GLN",
+        # glycine
+        "NGLY": "GLY",
+        "CGLY": "GLY",
+        # histidine
+        "HISD": "HIS",
+        "HISE": "HIS",
+        "HIS1": "HIS",
+        "HIS2": "HIS",
+        "HISA": "HIS",
+        "HISB": "HIS",
+        "HISH": "HIS",
+        "HID": "HIS",
+        "HIE": "HIS",
+        "HIP": "HIS",
+        "HSD": "HIS",
+        "HSE": "HIS",
+        "HSP": "HIS",
+        "NHID": "HIS",
+        "NHIE": "HIS",
+        "NHIP": "HIS",
+        "CHID": "HIS",
+        "CHIE": "HIS",
+        "CHIP": "HIS",
+        # isoleucine
+        "NILE": "ILE",
+        "CILE": "ILE",
+        # leucine
+        "NLEU": "LEU",
+        "CLEU": "LEU",
+        # lysine
+        "LYN": "LYS",
+        "LSN": "LYS",
+        "LYSH": "LYS",
+        "NLYS": "LYS",
+        "CLYS": "LYS",
+        # methionine
+        "NMET": "MET",
+        "CMET": "MET",
+        # phenylalanine
+        "NPHE": "PHE",
+        "CPHE": "PHE",
+        # proline
+        "NPRO": "PRO",
+        "CPRO": "PRO",
+        # serine
+        "NSER": "SER",
+        "CSER": "SER",
+        # threonine
+        "NTHR": "THR",
+        "CTHR": "THR",
+        # tryptophan
+        "NTRP": "TRP",
+        "CTRP": "TRP",
+        # tyrosine
+        "NTYR": "TYR",
+        "CTYR": "TYR",
+        # valine
+        "NVAL": "VAL",
+        "CVAL": "VAL",
+    }
+
+    # Convert residue names
+    converted_resnames = []
+    for resid in u.residues:
+        if resid.resname in resname_mapping:
+            converted_resnames.append(resid.resname)
+            resid.resname = resname_mapping[resid.resname]
+
+    # Convert atom names (e.g., 1HG2 to HG21)
+    converted_atomnames = []
+    for atom in u.atoms:
+        if atom.name.startswith(("1", "2", "3")) and len(atom.name) > 1:
+            converted_atomnames.append(atom.name)
+            atom.name = atom.name[1:] + atom.name[0]
+
+    # Save the converted PDB file
+    converted_PDB_path = str(PDB_path).replace(".pdb", "_converted.pdb")
+    u.atoms.write(converted_PDB_path)
+
+    print(f"Converted PDB saved to: {converted_PDB_path}")
+    print(
+        f"Original residue names: {original_resnames};\n"
+        f"Converted residue names: {set(converted_resnames)}"
+    )
+    print(
+        f"Original atom names: {original_atomnames};\n"
+        f"Converted atom names: {set(converted_atomnames)}"
+    )
+
+
 def get_ligand_around_resids(
     u: mda.Universe,
     ligand_name: str,
@@ -217,6 +413,7 @@ class TrajectoryHandler:
             else mda.Universe(top_path)
         )
         self.warning_check = warning_check
+        check_standard_names(self.universe)
 
         # optional
         self.set_config(
