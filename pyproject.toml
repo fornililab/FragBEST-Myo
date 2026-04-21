@@ -73,10 +73,22 @@ sphinx-autobuild = ">=2024.10.3"
 
 [tool.pixi.environments]
 pymol = { features = ["pymol"], no-default-feature = true }
+vina = { features = ["vina"], no-default-feature = true }
 
 [tool.pixi.feature.pymol.dependencies]
 numpy = ">=2.2.6"
 pymol-open-source = "*"
+
+[tool.pixi.feature.vina.dependencies]
+numpy = "*"
+swig = "*"
+boost-cpp = "*"
+sphinx = "*"
+sphinx_rtd_theme = "*"
+vina = "*"
+
+[dependency-groups]
+vina = ["pandas>=3.0.2,<4", "mdanalysis>=2.10.0,<3"]
 
 
 [tool.poe.tasks.format-check]

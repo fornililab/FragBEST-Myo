@@ -69,20 +69,27 @@ def run_testing(local_rank: int, config: Any):
     }
     it = iter(dataloader_test)
     for idx in range(config.le):
-        batch = next(it)
-        state = test_evaluator.run([batch])
+        try:
+            batch = next(it)
+            state = test_evaluator.run([batch])
 
-        for key in results:
-            if key == "filename":
-                results[key].append(batch["filename"][0])
-            else:
-                results[key].append(state.metrics[key])
+            for key in results:
+                if key == "filename":
+                    results[key].append(batch["filename"][0])
+                else:
+                    results[key].append(state.metrics[key])
 
-        logger.info(
-            f"{idx + 1} [{results['filename'][idx]}] - "
-            f"accuracy: {results['accuracy'][idx]:.3f}, "
-            f"mIoU: {results['miou'][idx]:.3f}"
-        )
+            logger.info(
+                f"{idx + 1} [{results['filename'][idx]}] - "
+                f"accuracy: {results['accuracy'][idx]:.3f}, "
+                f"mIoU: {results['miou'][idx]:.3f}"
+            )
+        except Exception as e:
+            logger.error(f"Exception: {e}")
+            logger.error(
+                f"Error processing batch {idx + 1} with filename {batch['filename'][0]}"
+            )
+            continue
 
     # save the results
     with open(f"{config.output_dir}/results.pkl", "wb") as f:
