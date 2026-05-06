@@ -18,7 +18,7 @@ sys.path.insert(0, str(Path("../..").resolve()))
 project = "FragBEST-Myo"
 author = "Yu-Yuan (Stuart) Yang"
 copyright = f"2024-{datetime.now().year}, {author}"
-release = "0.1.0"
+release = "0.2.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

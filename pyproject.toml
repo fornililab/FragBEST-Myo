@@ -5,7 +5,7 @@ authors = [
 dependencies = []
 name = "FragBEST-Myo"
 requires-python = ">= 3.10,<3.11"
-version = "0.1.0"
+version = "0.2.0"
 
 [build-system]
 build-backend = "hatchling.build"
@@ -78,6 +78,10 @@ vina = { features = ["vina"], no-default-feature = true }
 [tool.pixi.feature.pymol.dependencies]
 numpy = ">=2.2.6"
 pymol-open-source = "*"
+rdkit = "*"
+prolif = "*"
+ipykernel = "*"
+py3Dmol = "*"
 
 [tool.pixi.feature.vina.dependencies]
 numpy = "*"
@@ -86,6 +90,8 @@ boost-cpp = "*"
 sphinx = "*"
 sphinx_rtd_theme = "*"
 vina = "*"
+spyrmsd = "*"
+rdkit = "*"
 
 [dependency-groups]
 vina = ["pandas>=3.0.2,<4", "mdanalysis>=2.10.0,<3"]
