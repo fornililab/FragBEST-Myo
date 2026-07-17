@@ -87,11 +87,11 @@ See [Development](https://fragbest-myo.readthedocs.io/en/latest/development.html
 
 
 ## Citation
-If you publish results produced with FragBEST-Myo or develop methods based on FragBEST-Myo, please cite the following [paper](https://doi.org/10.64898/2026.02.13.703009):
+If you publish results produced with FragBEST-Myo or develop methods based on FragBEST-Myo, please cite the following [paper](https://doi.org/10.1021/acs.jcim.6c00549):
 
 ```
 # ACS format
-Yang, Y.-Y.; Pickersgill, R. W.; Fornili, A. Learning Fragment-Based Segmentation of Binding Sites from Molecular Dynamics: A Proof-of-Concept on Cardiac Myosin. bioRxiv February 16, 2026, p 2026.02.13.703009. https://doi.org/10.64898/2026.02.13.703009.
+Yang, Y.-Y.; Pickersgill, R. W.; Fornili, A. Learning Fragment-Based Segmentation of Binding Sites from Molecular Dynamics: A Proof of Concept on Cardiac Myosin. J. Chem. Inf. Model. 2026. https://doi.org/10.1021/acs.jcim.6c00549.
 ```
 
 ## License
