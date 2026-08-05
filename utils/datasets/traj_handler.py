@@ -626,7 +626,11 @@ class TrajectoryHandler:
         """
         # requirement: get_residues_at_pocket
         if not hasattr(self, "residues_at_pocket"):
-            self.get_residues_at_pocket()
+            try:
+                self.get_residues_at_pocket()
+            except mda.exceptions.SelectionError:
+                # Try to read from the pocket center if residues are not available
+                self.get_residues_at_pocket_by_center()
 
         assert self.residues_at_pocket != [], "residues_at_pocket is empty"
 
