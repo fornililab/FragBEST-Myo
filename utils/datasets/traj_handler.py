@@ -569,7 +569,11 @@ class TrajectoryHandler:
         """
         # requirement: get_pocket_residues
         if not hasattr(self, "pocket_residues"):
-            self.get_pocket_residues()
+            try:
+                self.get_residues_at_pocket()
+            except (mda.exceptions.SelectionError):
+                # Try to read from the pocket center if residues are not available
+                self.get_residues_at_pocket_by_center()
 
         self.get_frame(frame)
         self.pocket_center = self.pocket_residues.center_of_geometry().tolist()
